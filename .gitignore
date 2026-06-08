@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.eggs/
+*.egg
+
+# MuJoCo / runtime
+MUJOCO_LOG.TXT
+nohup.out
+
+# Results (too large for Git)
+results/
+rlagents/
+
+# Internal
+.claude/
+Paper/
+
+# IDE / System
+.vscode/
+.idea/
+*.swp
+.DS_Store
+.env

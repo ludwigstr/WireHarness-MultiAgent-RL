@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wireharness-gym"
+version = "0.1.0"
+description = "Gymnasium environment for Multi-Agent Wire Harness Routing with MuJoCo"
+
+requires-python = ">=3.9"
+license = {text = "MIT"}
+keywords = ["reinforcement-learning", "gymnasium", "mujoco", "multi-agent", "robotics"]
+dependencies = [
+    "gymnasium>=0.29",
+    "mujoco>=3.0",
+    "numpy",
+    "imageio[ffmpeg]",
+]
+
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["wireharness_gym*"]
+
+[tool.setuptools.package-data]
+"*" = ["data/*.xml", "data/simulation_config/*.xml"]
