@@ -27,7 +27,9 @@ Or directly:
 import os
 import sys
 
-os.environ.setdefault("MUJOCO_GL", "egl")
+import platform
+if platform.system() != "Windows":
+    os.environ.setdefault("MUJOCO_GL", "egl")
 
 # With editable install (pip install -e .), _ROOT points to the cloned repo root
 # where config.py, environment.py etc. live. pip install git+... breaks this.
