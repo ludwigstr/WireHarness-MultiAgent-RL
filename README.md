@@ -2,7 +2,9 @@
 
 A [Gymnasium](https://gymnasium.farama.org/)-compatible reinforcement learning environment for **multi-agent wire harness routing** in [MuJoCo](https://mujoco.org/).
 
-Five AGV movers carry cable segments on a 3.5 × 3.5 m assembly table and must navigate to one of five predefined target configurations without causing cable collisions.
+Five planar movers carry cable segments on an assembly board and must navigate to one of five predefined target configurations without causing cable collisions.
+
+![Simulation](docs/simulation.png)
 
 ---
 
