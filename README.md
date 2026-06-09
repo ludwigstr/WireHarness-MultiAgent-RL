@@ -1,8 +1,8 @@
 # WireHarness-MultiAgent-RL
 
-A [Gymnasium](https://gymnasium.farama.org/)-compatible reinforcement learning environment for **multi-agent wire harness routing** in [MuJoCo](https://mujoco.org/).
+A [Gymnasium](https://gymnasium.farama.org/)-compatible reinforcement learning environment for **multi-robot wire handling** in [MuJoCo](https://mujoco.org/).
 
-Five planar movers carry cable segments on an assembly board and must navigate to one of five predefined target configurations without causing cable collisions.
+A single policy controls five planar movers via a joint action space to navigate cable harnesses to target configurations on an assembly board without causing collisions.
 
 ![Simulation](docs/simulation.png)
 
