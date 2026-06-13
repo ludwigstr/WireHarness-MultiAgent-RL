@@ -60,7 +60,7 @@ def main():
         sys.exit(1)
     stage_order = [k - 1 for k in args.order]
 
-    import env  # noqa: F401  (registers WireHarness-v0)
+    import wireharness_gym  # noqa: F401  (registers WireHarness-v0)
     import gymnasium as gym
     from stable_baselines3 import A2C
     from stable_baselines3.common.vec_env import VecNormalize, DummyVecEnv

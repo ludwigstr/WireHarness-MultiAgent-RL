@@ -34,7 +34,7 @@ def _make_env_fn(stage):
     def _init():
         import sys
         sys.path.insert(0, _ROOT)
-        import env as _env_pkg  # noqa: F401
+        import wireharness_gym as _env_pkg  # noqa: F401
         import gymnasium as gym
         from stable_baselines3.common.monitor import Monitor
         return Monitor(gym.make("WireHarness-v0", stage=stage))
@@ -48,7 +48,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     stage = args.stage
 
-    import env
+    import wireharness_gym  # noqa: F401  (registers WireHarness-v0)
     import gymnasium as gym
     from stable_baselines3 import A2C
     from stable_baselines3.common.callbacks import (

@@ -28,7 +28,7 @@ from config import (
 if "WireHarness-v0" not in gym.envs.registry:
     gym.register(
         id="WireHarness-v0",
-        entry_point="env.wireharness_gym:WireHarnessEnv",
+        entry_point="wireharness_gym.env:WireHarnessEnv",
         kwargs={
             "xml_path":           os.path.abspath(XML_PATH_V0_5),
             "mover_starts":       MOVER_STARTS_V0_5,

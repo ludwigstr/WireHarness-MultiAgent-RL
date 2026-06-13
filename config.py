@@ -116,6 +116,6 @@ A2C_MAX_GRAD   = 0.3
 # ── XML ───────────────────────────────────────────────────────────────────────
 XML_PATH = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
-    "data", "WireHarness012e_base_ONLY_FOR_REFERENCE.xml"
+    "data", "WireHarness012e.xml"
 )
  
