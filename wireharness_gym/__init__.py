@@ -1,46 +1,51 @@
-"""
-wireharness_gym — Gymnasium environment for Multi-Agent Wire Harness Routing.
 
-Registers the following environment IDs:
+import os
+import sys
 
-    WireHarnessRouting-v0      target_config_idx=0  (fixed target)
-    WireHarnessRouting-v1      target_config_idx=None  (random target per episode)
+# Ensure v0_MAPF root is importable when this package is loaded in a subprocess
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-Installation (editable install required — pip install git+... does NOT work):
-    git clone https://github.com/ludwigstr/WireHarness-MultiAgent-RL.git
-    cd WireHarness-MultiAgent-RL
-    pip install -e .
+import gymnasium as gym
 
-Quick start:
-    import gymnasium as gym
-    import wireharness_gym
 
-    # Fixed target (config 0):
-    env = gym.make("WireHarnessRouting-v0")
-
-    # Random target sampled each episode:
-    env = gym.make("WireHarnessRouting-v1")
-
-    # Specific target config:
-    from wireharness_gym import WireHarnessEnv
-    env = WireHarnessEnv(target_config_idx=3)
-"""
-
-from gymnasium.envs.registration import register
-from wireharness_gym.env import WireHarnessEnv
-
-__all__ = ["WireHarnessEnv"]
-
-register(
-    id="WireHarnessRouting-v0",
-    entry_point="wireharness_gym.env:WireHarnessEnv",
-    max_episode_steps=750,
-    kwargs={"target_config_idx": 0},
+from config import (
+    MOVER_STARTS as MOVER_STARTS_V0_5,
+    MOVER_BODY_NAMES as MOVER_BODY_NAMES_V0_5,
+    MOVER_JOINT_NAMES as MOVER_JOINT_NAMES_V0_5,
+    MOVER_TARGETS as MOVER_TARGETS_V0_5,
+    XML_PATH as XML_PATH_V0_5,
+    SIMEND as SIMEND_V0_5,
+    VEL as VEL_V0_5,
+    GOAL_RADIUS as GOAL_RADIUS_V0_5,
+    CABLE_PAIR_LENGTHS as CABLE_PAIR_LENGTHS_V0_5,
+    FIELD_DIAG as FIELD_DIAG_V0_5,
+    W_OBSTACLE_MAP as W_OBSTACLE_MAP_V0_5,
+    W_CABLE_MAP as W_CABLE_MAP_V0_5,
+    CABLE_CONNECT as CABLE_CONNECT_V0_5,
+    CABLE_START_MU as CABLE_START_MU_V0_5,
 )
 
-register(
-    id="WireHarnessRouting-v1",
-    entry_point="wireharness_gym.env:WireHarnessEnv",
-    max_episode_steps=750,
-    kwargs={"target_config_idx": None},
-)
+if "WireHarness-v0" not in gym.envs.registry:
+    gym.register(
+        id="WireHarness-v0",
+        entry_point="env.wireharness_gym:WireHarnessEnv",
+        kwargs={
+            "xml_path":           os.path.abspath(XML_PATH_V0_5),
+            "mover_starts":       MOVER_STARTS_V0_5,
+            "mover_body_names":   MOVER_BODY_NAMES_V0_5,
+            "mover_joint_names":  MOVER_JOINT_NAMES_V0_5,
+            "targets":            MOVER_TARGETS_V0_5,   # configuration-major: targets[k] = Konf k
+            "stage":              0,   # override per training run: gym.make(..., stage=k)
+            "simend":             SIMEND_V0_5,
+            "vel":                VEL_V0_5,
+            "goal_radius":        GOAL_RADIUS_V0_5,
+            "cable_pair_lengths": CABLE_PAIR_LENGTHS_V0_5,
+            "field_diag":         FIELD_DIAG_V0_5,
+            "w_obstacle_map":     W_OBSTACLE_MAP_V0_5,
+            "w_cable_map":        W_CABLE_MAP_V0_5,
+            "cable_connect":      CABLE_CONNECT_V0_5,
+            "cable_start_mu":     CABLE_START_MU_V0_5,
+        },
+        max_episode_steps=SIMEND_V0_5 * 60,   # 3600 steps per configuration
+    )
+

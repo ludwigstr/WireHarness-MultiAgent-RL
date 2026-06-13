@@ -25,3 +25,8 @@ Paper/
 *.swp
 .DS_Store
 .env
+
+# Misc
+checkpoints/
+videos/
+logs/
