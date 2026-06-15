@@ -281,7 +281,6 @@ class Environment:
         self.states = []
         self.actions = []
         self.done = False
-
         self.simstart = self.data.time
 
         for i in range(self.num_agents):
@@ -344,16 +343,6 @@ class Environment:
 
         for i in range(self.num_agents):
             if abs(self.movers[i].get_distance_target(False)) > 0.5:
-                vm = np.asarray([self.movers[i].x, self.movers[i].y], dtype=float)
-                pm = vm - cs
-                if clockwise and angles[i] < 0:
-                    pass
-                elif clockwise and angles[i] > 0:
-                    pass
-                elif not clockwise and angles[i] > 0:
-                    pass
-                elif not clockwise and angles[i] < 0:
-                    pass
                 action = np.asarray([action_list[2 * i], action_list[2 * i + 1]], dtype=float)
             else:
                 action = self.movers[i].deterministic_move_t()
@@ -435,8 +424,6 @@ class Environment:
             self.movers[i].coords_y.append(self.data.xpos[self.movers[i].mu_index][1])
 
         stop = False
-
-        # ========== DONE CHECK ==========
         self.done = all(self.movers[i].done for i in range(self.num_agents))
         if self.done:
             self.rewards += 25
